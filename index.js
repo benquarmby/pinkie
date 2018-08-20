@@ -225,7 +225,7 @@ Promise.all = function (promises) {
 		throw new TypeError('You must pass an array to Promise.all().');
 	}
 
-	return new Promise(function (resolve, reject) {
+	return new this(function (resolve, reject) {
 		var results = [];
 		var remaining = 0;
 
@@ -260,7 +260,7 @@ Promise.race = function (promises) {
 		throw new TypeError('You must pass an array to Promise.race().');
 	}
 
-	return new Promise(function (resolve, reject) {
+	return new this(function (resolve, reject) {
 		for (var i = 0, promise; i < promises.length; i++) {
 			promise = promises[i];
 
@@ -278,13 +278,13 @@ Promise.resolve = function (value) {
 		return value;
 	}
 
-	return new Promise(function (resolve) {
+	return new this(function (resolve) {
 		resolve(value);
 	});
 };
 
 Promise.reject = function (reason) {
-	return new Promise(function (resolve, reject) {
+	return new this(function (resolve, reject) {
 		reject(reason);
 	});
 };
